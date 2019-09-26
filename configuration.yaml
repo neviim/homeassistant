@@ -1,0 +1,80 @@
+################################################################################
+# TYPE: Configuration
+# FILENAME: configuration.yaml
+# NAME: Configuração geral do Home Assistant
+################################################################################
+
+################################################################################
+#### HOME ASSISTANT
+################################################################################
+system_health:
+
+homeassistant:
+  ## NAME DA LOCACAO
+  name: !secret home
+  ## LOCATION COORDINATES
+  latitude: !secret home_longitude
+  longitude: !secret home_longitude
+  ## ALTITUDE MEDIDA EM METROS
+  elevation: !secret home_elevation
+  ## METRIC, IMPERIAL
+  unit_system: metric
+  ## C PARA CELCIUS, F PARA FAHRENHEIT
+  temperature_unit: C
+  ## TIME_ZONES - BRASIL
+  time_zone: America/Sao_Paulo
+
+  ## PACKAGES
+  packages: !include_dir_named packages/
+
+#### FRONTEND
+frontend:
+  javascript_version: latest
+  themes: !include_dir_merge_named themes/
+
+#### SIDEBAR ITEMS
+panel_iframe:
+  menu_tasmoadmin:
+    title: 'TasmoAdmin'
+    url: 'https://192.168.1.200:9541/devices_autoscan'
+    icon: mdi:progress-wrench
+  menu_nodered:
+    title: 'Node-Red'
+    url: 'http://10.0.9.48:1880'
+    icon: mdi:sitemap
+
+# SELECIONA THEMA FRONTEND.
+input_select:
+ hass_theme:
+    name: 'Thema corrente'
+    options:
+     - 'default'
+     - 'dark'
+     - 'teal'
+     - 'darkcyan'
+     - 'midnight'
+     - 'cpha'
+     - 'green'
+     - 'solarized'
+    initial: 'dark'
+    icon: mdi:theme-light-dark
+
+# TEXTO PARA SPEECH
+tts:
+  - platform: google_translate
+
+
+#### API
+api:
+
+#### CONFIGURATION UI
+config:
+
+#### MAP
+map:
+
+
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
